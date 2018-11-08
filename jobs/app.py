@@ -5,7 +5,7 @@ PATH = 'db/jobs.sqlite'
 
 app = Flask(__name__)
 
-def open_connetion():
+def open_connection():
     connection = getattr(g, '_connection', None)
     if connection == None:
         connection = g._connection = sqlite3.connect(PATH)
@@ -13,7 +13,7 @@ def open_connetion():
     return connection
 
 def execute_sql(sql, values=(), commit=False, single=False):
-    connection = open_connetion()
+    connection = open_connection()
     cursor = connection.execute(sql, values)
     if commit == True:
         results = connection.commit()
